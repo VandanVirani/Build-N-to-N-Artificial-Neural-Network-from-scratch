@@ -9,7 +9,23 @@ MNIST dataset
 
 ## LETS GET STARTED 
 
-First we will create class which will help to get instance , and inside that first we will initialize list and dictionary , dictionary is main storage to store weights , units .
+First  we will use this function  to get the input and ouput from mnist data 
+```
+import  numpy as np
+
+def get_mnist():
+    with np.load(f"D:/python programing/test/ann/mnist.npz") as f:
+        images, labels = f["x_train"], f["y_train"]
+    images = images.astype("float32") / 255
+    images = np.reshape(images, (images.shape[0], images.shape[1] * images.shape[2]))
+    labels = np.eye(10)[labels]
+    return images, labels
+input,output= get_mnist()
+print(input,output)
+```
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+we will create class which will help to get instance , and inside that first we will initialize list and dictionary , dictionary is main storage to store weights , units .
 ```
  class ANN : 
     def __init__(self):
