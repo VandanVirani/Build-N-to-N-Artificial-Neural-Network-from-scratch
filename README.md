@@ -9,7 +9,8 @@ MNIST dataset
 
 ## LETS GET STARTED 
 
-First  we will use this function  to get the input and ouput from mnist data 
+First  we will use this function  to get the input and ouput from mnist data . The MNIST database (Modified National Institute of Standards and Technology database[1]) is a large database of handwritten digits that is commonly used for training various image processing systems . The MNIST database contains 60,000 training images . 
+Because there are total 10 digits 0,1,2,3,4,5,6,7,8,9 there will be 10 class in last layer . 
 ```
 import  numpy as np
 
@@ -23,6 +24,8 @@ def get_mnist():
 input,output= get_mnist()
 print(input,output)
 ```
+
+![322](https://user-images.githubusercontent.com/76767487/148325194-287d827c-a3dd-4fda-9038-cb1349feba94.jpeg)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 we will create class which will help to get instance , and inside that first we will initialize list and dictionary , dictionary is main storage to store weights , units .
