@@ -181,7 +181,65 @@ here , the creation of weights , bias , initializing units will run only one tim
 
 we are adding loss calculation , loss function can be varies , here we used squared loss in ann function after forward propagation .  
 
-```         error = (1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
+```         
+            error = (1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
             ######## to check how many data classied correctly in training after how many epochs
             print("    error is  =>  ",error , "   and epochs is   ", y,"  ",e)
 ```            
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+## BACKPROPAGATION 
+
+```
+   def ann(self,inputs,outputs,epochs,learning_rate=0.1):
+       ###### creation of weights 
+       self.weights['0']=np.random.uniform(-0.5,0.5,(len(inputs[0]),self.no_of_units_in_layers[0]))
+       for i in range(len(self.no_of_units_in_layers)-1):
+           self.weights['{}'.format(i+1)]=np.random.uniform(-0.5,0.5,(self.no_of_units_in_layers[i],self.no_of_units_in_layers[i+1]))
+       for i in range(len(self.no_of_units_in_layers)):
+           self.units['{}'.format(i+1)] = np.zeros(self.no_of_units_in_layers[i])
+       for i in range(len(self.units)):
+           self.bias['{}'.format(i+1)]=np.zeros(len(self.units['{}'.format(i+1)]))
+       for y in range(epochs):
+         for e in range(len(outputs)):
+            self.units['0']=input[e]
+            self.units['real']=outputs[e]
+            ######   forward phase 
+            self.units['{}'.format(0)]=np.reshape(self.units['{}'.format(0)],(1,-1))
+            def forward(units,weights,bias):
+                for i in range(len(units)-2):
+                    units['{}'.format(i+1)] = self.np.reshape(self.sigmoid(self.np.dot(units['{}'.format(i)] ,weights['{}'.format(i)] )+bias['{}'.format(i+1)],i) ,(-1,))        
+            forward(self.units,self.weights,self.bias)
+            ########## change two dimentional array in unit_dict in to one dimensional
+            self.units['{}'.format(0)]= self.np.reshape(self.units['{}'.format(0)],(-1,))
+            
+            
+            ##############  error cost function
+            error=(1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
+            ######## to check how many data classied correctly in training after how many epochs
+            print("    error is  =>  ",error , "   and epochs is   ", y,"  ",e)
+            
+            
+            
+            ######## back propagation phase 
+            pd_backward_weights=self.copy.deepcopy(self.weights)
+            def activ_diff(y):
+                if self.activation_fun[y]=="sigmoid":
+                    return self.units['{}'.format(y+1)]*(1-self.units['{}'.format(y+1)])
+                elif self.activation_fun[y]=="relu":
+                    return self.units['{}'.format(y+1)]*(self.units['{}'.format(y+1)]>0)    
+            def backward(pd_backward_weights):
+                dd = (self.units["{}".format(len(self.units)-2)] - self.units["real"]) * activ_diff(len(self.units)-3) 
+                self.bias['{}'.format(len(self.units)-2)] += - learning_rate* dd
+                pd_backward_weights['{}'.format(len(self.units)-3)] = dd *self.units['{}'.format(len(self.units)-3)].reshape(-1,1)
+                dd = dd* self.weights['{}'.format(len(self.units)-3)]
+                self.weights['{}'.format(len(self.units)-3)] += - learning_rate* pd_backward_weights['{}'.format(len(self.units)-3)]
+
+                for i in reversed(range(len(self.weights)-1)):
+                   dd = np.sum(dd * activ_diff(i).reshape(-1,1),axis=1)
+                   self.bias['{}'.format(i+1)] += - learning_rate*dd
+                   pd_backward_weights['{}'.format(i)] = dd * self.units['{}'.format(i)].reshape(-1,1)
+                   dd = dd * self.weights['{}'.format(i)]
+                   self.weights['{}'.format(i)] += - learning_rate* pd_backward_weights['{}'.format(i)]
+            backward(pd_backward_weights)
+```
