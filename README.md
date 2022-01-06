@@ -258,7 +258,7 @@ In backpropagation we have to upadate both the bias and weight , their there are
 ## PREDICTION 
 
 now we  will add prediction function outside the ann function  
-```
+```yml
 def prediction(self,x):
         self.units['0']=x
         for i in range(len(self.units)-1):
@@ -275,7 +275,7 @@ def prediction(self,x):
 
 # LETS SUM IT ALL 
 
-```
+```yml
 import  numpy as np
 
 def get_mnist():
