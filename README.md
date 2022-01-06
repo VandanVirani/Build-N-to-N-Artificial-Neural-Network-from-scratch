@@ -126,4 +126,5 @@ x.add(2)
 x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from mnist dataset . 
 ```  
 
-<img src="https://user-images.githubusercontent.com/76767487/148325926-d03ede35-28ba-470e-841f-57129e87cab7.jpg" width=900 height=600 />
+
+![Screenshot 2022-01-06 092347](https://user-images.githubusercontent.com/76767487/148325926-d03ede35-28ba-470e-841f-57129e87cab7.jpg)
