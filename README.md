@@ -24,8 +24,7 @@ def get_mnist():
 input,output= get_mnist()
 print(input,output)
 ```
-
-![322](https://user-images.githubusercontent.com/76767487/148325194-287d827c-a3dd-4fda-9038-cb1349feba94.jpeg)
+<img src="https://user-images.githubusercontent.com/76767487/148325194-287d827c-a3dd-4fda-9038-cb1349feba94.jpeg" width=900 height=600 />
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 we will create class which will help to get instance , and inside that first we will initialize list and dictionary , dictionary is main storage to store weights , units .
