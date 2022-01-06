@@ -190,6 +190,7 @@ we are adding loss calculation , loss function can be varies , here we used squa
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 ## BACKPROPAGATION 
 
+now we are using a new dictionary which is a copy of weights which will store partial derivaties , you will  think " what I have done " . that why it is neccessary to understand the mathematics behind the backpropagation
 ```
    def ann(self,inputs,outputs,epochs,learning_rate=0.1):
        ###### creation of weights 
@@ -223,18 +224,22 @@ we are adding loss calculation , loss function can be varies , here we used squa
             
             ######## back propagation phase 
             pd_backward_weights=self.copy.deepcopy(self.weights)
-            def activ_diff(y):
+            def activ_diff(y):  # we used this function  because of user choise whether the function is sigmoid or relu
                 if self.activation_fun[y]=="sigmoid":
                     return self.units['{}'.format(y+1)]*(1-self.units['{}'.format(y+1)])
                 elif self.activation_fun[y]=="relu":
                     return self.units['{}'.format(y+1)]*(self.units['{}'.format(y+1)]>0)    
             def backward(pd_backward_weights):
+                #------------------------------------->
+                # this is for last layer
                 dd = (self.units["{}".format(len(self.units)-2)] - self.units["real"]) * activ_diff(len(self.units)-3) 
                 self.bias['{}'.format(len(self.units)-2)] += - learning_rate* dd
                 pd_backward_weights['{}'.format(len(self.units)-3)] = dd *self.units['{}'.format(len(self.units)-3)].reshape(-1,1)
                 dd = dd* self.weights['{}'.format(len(self.units)-3)]
                 self.weights['{}'.format(len(self.units)-3)] += - learning_rate* pd_backward_weights['{}'.format(len(self.units)-3)]
-
+ 
+                #------------------------------------->
+                # this is for all layer except last 
                 for i in reversed(range(len(self.weights)-1)):
                    dd = np.sum(dd * activ_diff(i).reshape(-1,1),axis=1)
                    self.bias['{}'.format(i+1)] += - learning_rate*dd
@@ -243,3 +248,5 @@ we are adding loss calculation , loss function can be varies , here we used squa
                    self.weights['{}'.format(i)] += - learning_rate* pd_backward_weights['{}'.format(i)]
             backward(pd_backward_weights)
 ```
+
+In backpropagation we have to upadate both the bias and weight , their there are two dict weights and pd_backward_weights which is a copy of weights , now we will store all the partial derivatives in pd_bakcward_weights because we want to store new value of weights in weights dictionary so we will simply do calucation of formula ( old_w - LR * diff) on pd_bakcward_weights and store the output (new value ) in weights dictionary so in next loop updated weights dictionary will be used . Then same process will run forward and backward .
