@@ -136,3 +136,39 @@ x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from 
 
 𝐈𝐧𝐢𝐭𝐢𝐚𝐥𝐥𝐲 𝐭𝐡𝐞 𝐮𝐧𝐢𝐭𝐬 𝐯𝐚𝐥𝐮𝐞 𝐢𝐧 𝐮𝐧𝐢𝐭𝐬 𝐝𝐢𝐜𝐭𝐢𝐨𝐧𝐚𝐫𝐲 𝐢𝐬 𝟎 , 𝐢𝐭 𝐰𝐢𝐥𝐥 𝐜𝐡𝐚𝐧𝐠𝐞𝐝 𝐝𝐮𝐫𝐢𝐧𝐠 𝐟𝐨𝐫𝐰𝐚𝐫𝐝 𝐩𝐫𝐨𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧 .
 
+## FORWARD PROPAGATION  
+
+
+```
+def ann(self,inputs,outputs,epochs=10,learning_rate=0.1):  # default value  of learning rate is 0.1 and epochs is 10 
+       ###### creation of weights 
+       self.weights['0']=np.random.uniform(-0.5,0.5,(len(inputs[0]),self.no_of_units_in_layers[0]))
+       for i in range(len(self.no_of_units_in_layers)-1):
+           self.weights['{}'.format(i+1)]=np.random.uniform(-0.5,0.5,(self.no_of_units_in_layers[i],self.no_of_units_in_layers[i+1]))
+       print("weights : ",self.weights)    
+       ###### initializing the units 
+       for i in range(len(self.no_of_units_in_layers)):
+           self.units['{}'.format(i+1)] = np.zeros(self.no_of_units_in_layers[i])
+       print("units : ",self.units)        
+       for i in range(len(self.units)):
+           self.bias['{}'.format(i+1)]=np.zeros(len(self.units['{}'.format(i+1)]))
+       print("bias : ",self.bias)    
+       
+       #-------------------------------------------------------->
+       for y in range(epochs):
+         for e in range(len(outputs)):
+            self.units['0']=input[e]
+            self.units['real']=outputs[e]
+            
+            ######   forward phase 
+            ########## change one  dimentional array in unit_dict in to two dimensional
+            self.units['{}'.format(0)]=np.reshape(self.units['{}'.format(0)],(1,-1))   # because we want to calculate matrix multiplication 
+            def forward(units,weights,bias):
+                for i in range(len(units)-2):
+                    units['{}'.format(i+1)] = self.np.reshape(self.sigmoid(self.np.dot(units['{}'.format(i)] ,weights['{}'.format(i)] )+bias['{}'.format(i+1)],i) ,(-1,))        
+            forward(self.units,self.weights,self.bias)
+            ########## change two dimentional array in unit_dict in to one dimensional
+            self.units['{}'.format(0)]= self.np.reshape(self.units['{}'.format(0)],(-1,))
+```  
+
+here , the creation of weights , bias , initializing units will run only one time but the forward propagation , backwackprapagation will run more than one for training so we wil write entire forward and backward code in for loop , The regularisation of the for loop will be done by epochs , if epochs is 1 the our code will analyse the entire dataset once , if epochs is 10 then it will scan 10 times . if you don't understand then try to run the parts of the code . 
