@@ -1,7 +1,7 @@
 ## Welcome 
 
 This repository contains code to build N to N artificial Neural Network , N to N means N number of layers and units . 
-We are going to use the concept of oop e.g class , instance . This project require knowledge about oop concept , for loop , function , numpy , dictionary . 
+We are going to use the concept of oop e.g class , instance . This project require knowledge about oop concept , for loop , arrays , matrix , function , numpy , dictionary . 
 We will build our own model and  we will implement MNIST dataset to our model . 
 
 MNIST dataset 
@@ -122,9 +122,13 @@ class ANN:
        
 x=ANN()
 x.add(3,"sigmoid")
-x.add(2)
+x.add(10)
 x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from mnist dataset . 
 ```  
 
-<img src="https://user-images.githubusercontent.com/76767487/148326199-26876108-c5ba-4616-9afc-ed119dd5fe03.jpg" width=900 height=230 />
+<img src="https://user-images.githubusercontent.com/76767487/148326714-1543568b-bd7d-4b36-8e71-06b12e3107c9.jpg" width=900 height=230 />
 
+Now we will be thinking how i have created weights . see below image
+
+<img src="https://user-images.githubusercontent.com/76767487/148328217-65d9260b-d0e5-480f-8efb-408bc1a8a8ad.jpeg" width=900 height=230 />
+<img src="" width=900 height=230 />
