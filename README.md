@@ -377,6 +377,10 @@ x=ANN()
 x.add(15,"sigmoid")
 x.add(10)
 x.ann(input,output,5,learning_rate=0.01)    # input and output are taken from mnist dataset .
-
+correct_counter=0
+for i in range(5999):
+    if x.prediction(input[i+54000]) ==np.argmax(output[i+54000]):
+      correct_counter+=1
+print("percentage is ",(correct_counter/5999)*100," %")
 ```
 
