@@ -130,5 +130,5 @@ x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from 
 
 Now we will be thinking how i have created weights . see below image
 
+
 <img src="https://user-images.githubusercontent.com/76767487/148328217-65d9260b-d0e5-480f-8efb-408bc1a8a8ad.jpeg" width=900 height=230 />
-<img src="" width=900 height=230 />
