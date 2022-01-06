@@ -23,6 +23,7 @@ def get_mnist():
     return images, labels
 input,output= get_mnist()
 print(input,output)
+print(input.shape,output.shape)
 ```
 <img src="https://user-images.githubusercontent.com/76767487/148325194-287d827c-a3dd-4fda-9038-cb1349feba94.jpeg" width=900 height=600 />
 
@@ -48,13 +49,13 @@ class ANN:
         self.units={}
         self.bias={}
     
-    def add(self,unit=0,activation=0):  # default value of activation is 0
-        self.no_of_units_in_layers.append(int(unit))
-        self.activation_fun.append(activation)
+    def add(self,unit,activation=0):                 # default value of activation is 0
+        self.no_of_units_in_layers.append(int(unit))   # append the information in no_of_units_in_layers list
+        self.activation_fun.append(activation)         # append the information in activation_fun list
 
 x=ANN()
 x.add(3,"sigmoid")
-x.add(2)
+x.add(10)   # because 10 class are there 
 ```        
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Now its time to create activation function , it takes two arguments first is array and second is a number it tells what layer need to use which activation function . 
@@ -87,8 +88,6 @@ Now its time to take input , output , learning rate , epochs to our model .to do
 1) creation of weights : initially the value of weights is random and get change by backpropagation . to store weights we use dictionary 
 
 ```
-input=[0.1,0.2,0.3,0.4,0.5,0.6,0.7]
-output=[0.01,0.99]
 
 class ANN:
     import math,numpy as np
@@ -124,5 +123,7 @@ class ANN:
 x=ANN()
 x.add(3,"sigmoid")
 x.add(2)
-x.ann(input,output,500,learning_rate=0.01)
+x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from mnist dataset . 
 ```  
+
+<img src="https://user-images.githubusercontent.com/76767487/148325926-d03ede35-28ba-470e-841f-57129e87cab7.jpg" width=900 height=600 />
