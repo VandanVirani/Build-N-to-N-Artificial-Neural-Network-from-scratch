@@ -174,3 +174,14 @@ def ann(self,inputs,outputs,epochs=10,learning_rate=0.1):  # default value  of l
 ```  
 
 here , the creation of weights , bias , initializing units will run only one time but the forward propagation , backwackprapagation will run more than one for training so we wil write entire forward and backward code in for loop , The regularisation of the for loop will be done by epochs , if epochs is 1 the our code will analyse the entire dataset once , if epochs is 10 then it will scan 10 times . if you don't understand then try to run the parts of the code . 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+## LOSS 
+
+we are adding loss calculation , loss function can be varies , here we used squared loss in ann function after forward propagation .  
+
+```         error = (1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
+            ######## to check how many data classied correctly in training after how many epochs
+            print("    error is  =>  ",error , "   and epochs is   ", y,"  ",e)
+```            
