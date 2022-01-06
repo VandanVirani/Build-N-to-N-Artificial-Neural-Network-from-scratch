@@ -123,7 +123,7 @@ class ANN:
 x=ANN()
 x.add(3,"sigmoid")
 x.add(10)
-x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from mnist dataset . 
+x.ann(input,output,5,learning_rate=0.01)    # input and output are taken from mnist dataset . 
 ```  
 
 <img src="https://user-images.githubusercontent.com/76767487/148326714-1543568b-bd7d-4b36-8e71-06b12e3107c9.jpg" width=900 height=230 />
@@ -191,7 +191,7 @@ we are adding loss calculation , loss function can be varies , here we used squa
 ## BACKPROPAGATION 
 
 now we are using a new dictionary which is a copy of weights which will store partial derivaties , you will  think " what I have done " . that why it is neccessary to understand the mathematics behind the backpropagation
-```
+```yml
    def ann(self,inputs,outputs,epochs,learning_rate=0.1):
        ###### creation of weights 
        self.weights['0']=np.random.uniform(-0.5,0.5,(len(inputs[0]),self.no_of_units_in_layers[0]))
@@ -228,7 +228,9 @@ now we are using a new dictionary which is a copy of weights which will store pa
                 if self.activation_fun[y]=="sigmoid":
                     return self.units['{}'.format(y+1)]*(1-self.units['{}'.format(y+1)])
                 elif self.activation_fun[y]=="relu":
-                    return self.units['{}'.format(y+1)]*(self.units['{}'.format(y+1)]>0)    
+                    return self.units['{}'.format(y+1)]*(self.units['{}'.format(y+1)]>0)
+                elif self.activation_fun[y]==0:
+                    return y       
             def backward(pd_backward_weights):
                 #------------------------------------->
                 # this is for last layer
@@ -250,3 +252,131 @@ now we are using a new dictionary which is a copy of weights which will store pa
 ```
 
 In backpropagation we have to upadate both the bias and weight , their there are two dict weights and pd_backward_weights which is a copy of weights , now we will store all the partial derivatives in pd_bakcward_weights because we want to store new value of weights in weights dictionary so we will simply do calucation of formula ( old_w - LR * diff) on pd_bakcward_weights and store the output (new value ) in weights dictionary so in next loop updated weights dictionary will be used . Then same process will run forward and backward .
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+## PREDICTION 
+
+now we  will add prediction function outside the ann function  
+```
+def prediction(self,x):
+        self.units['0']=x
+        for i in range(len(self.units)-1):
+            self.units['{}'.format(i)]= np.reshape(self.units['{}'.format(i)],(1,-1)) 
+        def forward(units,weights,bias):
+            for i in range(len(units)-2):
+                units['{}'.format(i+1)] = self.sigmoid(np.dot(units['{}'.format(i)] ,weights['{}'.format(i)] )+bias['{}'.format(i+1)],i)
+        forward(self.units,self.weights,self.bias)
+        for i in range(len(self.units)-1):
+            self.units['{}'.format(i)]= np.reshape(self.units['{}'.format(i)],(-1))     
+        return(np.argmax(self.units['{}'.format(len(self.units)-2)]))
+```
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# LETS SUM IT ALL 
+
+```
+import  numpy as np
+
+def get_mnist():
+    with np.load(f"C:\\Users\\Ravi\\Desktop\\train\\mnist.npz") as f:
+        images, labels = f["x_train"], f["y_train"]
+    images = images.astype("float32") / 255
+    images = np.reshape(images, (images.shape[0], images.shape[1] * images.shape[2]))
+    labels = np.eye(10)[labels]
+    return images, labels
+input,output= get_mnist()
+
+class ANN:
+    import numpy as np,math,copy
+    np.random.seed(42)
+    def __init__(self):
+        self.no_of_units_in_layers=[]
+        self.activation_fun=[]
+        self.weights={}
+        self.units={}
+        self.bias={}
+    def add(self,unit=0,activation=0):
+        self.no_of_units_in_layers.append(int(unit))
+        self.activation_fun.append(activation)
+    def sigmoid(self,x,i):
+        if self.activation_fun[i]=="sigmoid":
+            return 1/(1 + self.math.e**(-x))
+        elif self.activation_fun[i]=="relu":
+            if x<0:
+                return 0
+            else:
+                return x
+        elif self.activation_fun[i]=="softplus":
+           return self.math.log(1+self.math.e**x,base=self.math.e)
+        elif self.activation_fun[i]=="tanh":
+            return (self.math.e**x - self.math.e**(-x))/(self.math.e**x + self.math.e**(-x))
+        else :
+            return x    
+    def ann(self,inputs,outputs,epochs,learning_rate=0.1):
+       ###### creation of weights 
+       self.weights['0']=np.random.uniform(-0.5,0.5,(len(inputs[0]),self.no_of_units_in_layers[0]))
+       for i in range(len(self.no_of_units_in_layers)-1):
+           self.weights['{}'.format(i+1)]=np.random.uniform(-0.5,0.5,(self.no_of_units_in_layers[i],self.no_of_units_in_layers[i+1]))
+       for i in range(len(self.no_of_units_in_layers)):
+           self.units['{}'.format(i+1)] = np.zeros(self.no_of_units_in_layers[i])
+       for i in range(len(self.units)):
+           self.bias['{}'.format(i+1)]=np.zeros(len(self.units['{}'.format(i+1)]))
+       for y in range(epochs):
+         for e in range(len(outputs)):
+            self.units['0']=input[e]
+            self.units['real']=outputs[e]
+            ######   forward phase 
+            self.units['{}'.format(0)]=np.reshape(self.units['{}'.format(0)],(1,-1))
+            def forward(units,weights,bias):
+                for i in range(len(units)-2):
+                    units['{}'.format(i+1)] = self.np.reshape(self.sigmoid(self.np.dot(units['{}'.format(i)] ,weights['{}'.format(i)] )+bias['{}'.format(i+1)],i) ,(-1,))        
+            forward(self.units,self.weights,self.bias)
+            ########## change two dimentional array in unit_dict in to one dimensional
+            self.units['{}'.format(0)]= self.np.reshape(self.units['{}'.format(0)],(-1,))
+            ##############  error cost function
+            error=(1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
+            ######## to check how many data classied correctly in training after how many epochs
+            print("    error is  =>  ",error , "   and epochs is   ", y,"  ",e)
+            ######## back propagation phase 
+            pd_backward_weights=self.copy.deepcopy(self.weights)
+            def activ_diff(y):
+                if self.activation_fun[y]=="sigmoid":
+                    return self.units['{}'.format(y+1)]*(1-self.units['{}'.format(y+1)])
+                elif self.activation_fun[y]=="relu":
+                    return self.units['{}'.format(y+1)]*(self.units['{}'.format(y+1)]>0)    
+                elif self.activation_fun[y]==0:
+                    return y       
+            def backward(pd_backward_weights):
+                dd = (self.units["{}".format(len(self.units)-2)] - self.units["real"]) * activ_diff(len(self.units)-3) 
+                self.bias['{}'.format(len(self.units)-2)] += - learning_rate* dd
+                pd_backward_weights['{}'.format(len(self.units)-3)] = dd *self.units['{}'.format(len(self.units)-3)].reshape(-1,1)
+                dd = dd* self.weights['{}'.format(len(self.units)-3)]
+                self.weights['{}'.format(len(self.units)-3)] += - learning_rate* pd_backward_weights['{}'.format(len(self.units)-3)]
+
+                for i in reversed(range(len(self.weights)-1)):
+                   dd = np.sum(dd * activ_diff(i).reshape(-1,1),axis=1)
+                   self.bias['{}'.format(i+1)] += - learning_rate*dd
+                   pd_backward_weights['{}'.format(i)] = dd * self.units['{}'.format(i)].reshape(-1,1)
+                   dd = dd * self.weights['{}'.format(i)]
+                   self.weights['{}'.format(i)] += - learning_rate* pd_backward_weights['{}'.format(i)]
+            backward(pd_backward_weights)
+    def prediction(self,x):
+        self.units['0']=x
+        for i in range(len(self.units)-1):
+            self.units['{}'.format(i)]= np.reshape(self.units['{}'.format(i)],(1,-1)) 
+        def forward(units,weights,bias):
+            for i in range(len(units)-2):
+                units['{}'.format(i+1)] = self.sigmoid(np.dot(units['{}'.format(i)] ,weights['{}'.format(i)] )+bias['{}'.format(i+1)],i)
+        forward(self.units,self.weights,self.bias)
+        for i in range(len(self.units)-1):
+            self.units['{}'.format(i)]= np.reshape(self.units['{}'.format(i)],(-1))     
+        return(np.argmax(self.units['{}'.format(len(self.units)-2)]))
+
+x=ANN()
+x.add(15,"sigmoid")
+x.add(10)
+x.ann(input,output,5,learning_rate=0.01)    # input and output are taken from mnist dataset .
+
+```
+
