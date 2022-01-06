@@ -130,4 +130,7 @@ x.ann(input,output,500,learning_rate=0.01)    # input and output are taken from 
 
 Now we will be thinking how i have created weights . see below image
 
-![WhatsApp Image 2022-01-06 at 9 59 03 AM](https://user-images.githubusercontent.com/76767487/148328217-65d9260b-d0e5-480f-8efb-408bc1a8a8ad.jpeg)
+
+![WhatsApp Image 2022-01-06 at 9 59 03 AM](https://user-images.githubusercontent.com/76767487/148328318-cb6342a4-db48-4b8a-9962-e4ba904fb66e.jpeg)
+
+
