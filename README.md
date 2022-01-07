@@ -173,13 +173,13 @@ def ann(self,inputs,outputs,epochs=10,learning_rate=0.1):  # default value  of l
             self.units['{}'.format(0)]= self.np.reshape(self.units['{}'.format(0)],(-1,))
 ```  
 
-here , the creation of weights , bias , initializing units will run only one time but the forward propagation , backwackprapagation will run more than one for training so we wil write entire forward and backward code in for loop , The regularisation of the for loop will be done by epochs , if epochs is 1 the our code will analyse the entire dataset once , if epochs is 10 then it will scan 10 times . if you don't understand then try to run the parts of the code . 
+𝐡𝐞𝐫𝐞 , 𝐭𝐡𝐞 𝐜𝐫𝐞𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 , 𝐛𝐢𝐚𝐬 , 𝐢𝐧𝐢𝐭𝐢𝐚𝐥𝐢𝐳𝐢𝐧𝐠 𝐮𝐧𝐢𝐭𝐬 𝐰𝐢𝐥𝐥 𝐫𝐮𝐧 𝐨𝐧𝐥𝐲 𝐨𝐧𝐞 𝐭𝐢𝐦𝐞 𝐛𝐮𝐭 𝐭𝐡𝐞 𝐟𝐨𝐫𝐰𝐚𝐫𝐝 𝐩𝐫𝐨𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧 , 𝐛𝐚𝐜𝐤𝐰𝐚𝐜𝐤𝐩𝐫𝐚𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧 𝐰𝐢𝐥𝐥 𝐫𝐮𝐧 𝐦𝐨𝐫𝐞 𝐭𝐡𝐚𝐧 𝐨𝐧𝐞 𝐟𝐨𝐫 𝐭𝐫𝐚𝐢𝐧𝐢𝐧𝐠 𝐬𝐨 𝐰𝐞 𝐰𝐢𝐥 𝐰𝐫𝐢𝐭𝐞 𝐞𝐧𝐭𝐢𝐫𝐞 𝐟𝐨𝐫𝐰𝐚𝐫𝐝 𝐚𝐧𝐝 𝐛𝐚𝐜𝐤𝐰𝐚𝐫𝐝 𝐜𝐨𝐝𝐞 𝐢𝐧 𝐟𝐨𝐫 𝐥𝐨𝐨𝐩 , 𝐓𝐡𝐞 𝐫𝐞𝐠𝐮𝐥𝐚𝐫𝐢𝐬𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐭𝐡𝐞 𝐟𝐨𝐫 𝐥𝐨𝐨𝐩 𝐰𝐢𝐥𝐥 𝐛𝐞 𝐝𝐨𝐧𝐞 𝐛𝐲 𝐞𝐩𝐨𝐜𝐡𝐬 , 𝐢𝐟 𝐞𝐩𝐨𝐜𝐡𝐬 𝐢𝐬 𝟏 𝐭𝐡𝐞 𝐨𝐮𝐫 𝐜𝐨𝐝𝐞 𝐰𝐢𝐥𝐥 𝐚𝐧𝐚𝐥𝐲𝐬𝐞 𝐭𝐡𝐞 𝐞𝐧𝐭𝐢𝐫𝐞 𝐝𝐚𝐭𝐚𝐬𝐞𝐭 𝐨𝐧𝐜𝐞 , 𝐢𝐟 𝐞𝐩𝐨𝐜𝐡𝐬 𝐢𝐬 𝟏𝟎 𝐭𝐡𝐞𝐧 𝐢𝐭 𝐰𝐢𝐥𝐥 𝐬𝐜𝐚𝐧 𝟏𝟎 𝐭𝐢𝐦𝐞𝐬 . 𝐢𝐟 𝐲𝐨𝐮 𝐝𝐨𝐧'𝐭 𝐮𝐧𝐝𝐞𝐫𝐬𝐭𝐚𝐧𝐝 𝐭𝐡𝐞𝐧 𝐭𝐫𝐲 𝐭𝐨 𝐫𝐮𝐧 𝐭𝐡𝐞 𝐩𝐚𝐫𝐭𝐬 𝐨𝐟 𝐭𝐡𝐞 𝐜𝐨𝐝𝐞 .
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-## LOSS 
+##𝐋𝐎𝐒𝐒 
 
-we are adding loss calculation , loss function can be varies , here we used squared loss in ann function after forward propagation .  
+𝐰𝐞 𝐚𝐫𝐞 𝐚𝐝𝐝𝐢𝐧𝐠 𝐥𝐨𝐬𝐬 𝐜𝐚𝐥𝐜𝐮𝐥𝐚𝐭𝐢𝐨𝐧 , 𝐥𝐨𝐬𝐬 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧 𝐜𝐚𝐧 𝐛𝐞 𝐯𝐚𝐫𝐢𝐞𝐬 , 𝐡𝐞𝐫𝐞 𝐰𝐞 𝐮𝐬𝐞𝐝 𝐬𝐪𝐮𝐚𝐫𝐞𝐝 𝐥𝐨𝐬𝐬 𝐢𝐧 𝐚𝐧𝐧 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧 𝐚𝐟𝐭𝐞𝐫 𝐟𝐨𝐫𝐰𝐚𝐫𝐝 𝐩𝐫𝐨𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧 .
 
 ```         
             error = (1/len(self.units['real']))* np.sum ((self.units['{}'.format(len(self.units)-2)] - self.units['real'] )**2)
@@ -188,9 +188,9 @@ we are adding loss calculation , loss function can be varies , here we used squa
 ```            
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-## BACKPROPAGATION 
+## 𝐁𝐀𝐂𝐊𝐏𝐑𝐎𝐏𝐀𝐆𝐀𝐓𝐈𝐎𝐍 
 
-now we are using a new dictionary which is a copy of weights which will store partial derivaties , you will  think " what I have done " . that why it is neccessary to understand the mathematics behind the backpropagation
+𝐧𝐨𝐰 𝐰𝐞 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐚 𝐧𝐞𝐰 𝐝𝐢𝐜𝐭𝐢𝐨𝐧𝐚𝐫𝐲 𝐰𝐡𝐢𝐜𝐡 𝐢𝐬 𝐚 𝐜𝐨𝐩𝐲 𝐨𝐟 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐰𝐡𝐢𝐜𝐡 𝐰𝐢𝐥𝐥 𝐬𝐭𝐨𝐫𝐞 𝐩𝐚𝐫𝐭𝐢𝐚𝐥 𝐝𝐞𝐫𝐢𝐯𝐚𝐭𝐢𝐞𝐬 , 𝐲𝐨𝐮 𝐰𝐢𝐥𝐥  𝐭𝐡𝐢𝐧𝐤 " 𝐰𝐡𝐚𝐭 𝐈 𝐡𝐚𝐯𝐞 𝐝𝐨𝐧𝐞 " . 𝐭𝐡𝐚𝐭 𝐰𝐡𝐲 𝐢𝐭 𝐢𝐬 𝐧𝐞𝐜𝐜𝐞𝐬𝐬𝐚𝐫𝐲 𝐭𝐨 𝐮𝐧𝐝𝐞𝐫𝐬𝐭𝐚𝐧𝐝 𝐭𝐡𝐞 𝐦𝐚𝐭𝐡𝐞𝐦𝐚𝐭𝐢𝐜𝐬 𝐛𝐞𝐡𝐢𝐧𝐝 𝐭𝐡𝐞 𝐛𝐚𝐜𝐤𝐩𝐫𝐨𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧
 ```yml
    def ann(self,inputs,outputs,epochs,learning_rate=0.1):
        ###### creation of weights 
@@ -251,13 +251,13 @@ now we are using a new dictionary which is a copy of weights which will store pa
             backward(pd_backward_weights)
 ```
 
-In backpropagation we have to upadate both the bias and weight , their there are two dict weights and pd_backward_weights which is a copy of weights , now we will store all the partial derivatives in pd_bakcward_weights because we want to store new value of weights in weights dictionary so we will simply do calucation of formula ( old_w - LR * diff) on pd_bakcward_weights and store the output (new value ) in weights dictionary so in next loop updated weights dictionary will be used . Then same process will run forward and backward .
+𝐈𝐧 𝐛𝐚𝐜𝐤𝐩𝐫𝐨𝐩𝐚𝐠𝐚𝐭𝐢𝐨𝐧 𝐰𝐞 𝐡𝐚𝐯𝐞 𝐭𝐨 𝐮𝐩𝐚𝐝𝐚𝐭𝐞 𝐛𝐨𝐭𝐡 𝐭𝐡𝐞 𝐛𝐢𝐚𝐬 𝐚𝐧𝐝 𝐰𝐞𝐢𝐠𝐡𝐭 , 𝐭𝐡𝐞𝐢𝐫 𝐭𝐡𝐞𝐫𝐞 𝐚𝐫𝐞 𝐭𝐰𝐨 𝐝𝐢𝐜𝐭 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐚𝐧𝐝 𝐩𝐝_𝐛𝐚𝐜𝐤𝐰𝐚𝐫𝐝_𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐰𝐡𝐢𝐜𝐡 𝐢𝐬 𝐚 𝐜𝐨𝐩𝐲 𝐨𝐟 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 , 𝐧𝐨𝐰 𝐰𝐞 𝐰𝐢𝐥𝐥 𝐬𝐭𝐨𝐫𝐞 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐩𝐚𝐫𝐭𝐢𝐚𝐥 𝐝𝐞𝐫𝐢𝐯𝐚𝐭𝐢𝐯𝐞𝐬 𝐢𝐧 𝐩𝐝_𝐛𝐚𝐤𝐜𝐰𝐚𝐫𝐝_𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐛𝐞𝐜𝐚𝐮𝐬𝐞 𝐰𝐞 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐬𝐭𝐨𝐫𝐞 𝐧𝐞𝐰 𝐯𝐚𝐥𝐮𝐞 𝐨𝐟 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐢𝐧 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐝𝐢𝐜𝐭𝐢𝐨𝐧𝐚𝐫𝐲 𝐬𝐨 𝐰𝐞 𝐰𝐢𝐥𝐥 𝐬𝐢𝐦𝐩𝐥𝐲 𝐝𝐨 𝐜𝐚𝐥𝐮𝐜𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐟𝐨𝐫𝐦𝐮𝐥𝐚 ( 𝐨𝐥𝐝_𝐰 - 𝐋𝐑 * 𝐝𝐢𝐟𝐟) 𝐨𝐧 𝐩𝐝_𝐛𝐚𝐤𝐜𝐰𝐚𝐫𝐝_𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐚𝐧𝐝 𝐬𝐭𝐨𝐫𝐞 𝐭𝐡𝐞 𝐨𝐮𝐭𝐩𝐮𝐭 (𝐧𝐞𝐰 𝐯𝐚𝐥𝐮𝐞 ) 𝐢𝐧 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐝𝐢𝐜𝐭𝐢𝐨𝐧𝐚𝐫𝐲 𝐬𝐨 𝐢𝐧 𝐧𝐞𝐱𝐭 𝐥𝐨𝐨𝐩 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐰𝐞𝐢𝐠𝐡𝐭𝐬 𝐝𝐢𝐜𝐭𝐢𝐨𝐧𝐚𝐫𝐲 𝐰𝐢𝐥𝐥 𝐛𝐞 𝐮𝐬𝐞𝐝 . 𝐓𝐡𝐞𝐧 𝐬𝐚𝐦𝐞 𝐩𝐫𝐨𝐜𝐞𝐬𝐬 𝐰𝐢𝐥𝐥 𝐫𝐮𝐧 𝐟𝐨𝐫𝐰𝐚𝐫𝐝 𝐚𝐧𝐝 𝐛𝐚𝐜𝐤𝐰𝐚𝐫𝐝 .
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-## PREDICTION 
+## 𝐏𝐑𝐄𝐃𝐈𝐂𝐓𝐈𝐎𝐍 
 
-now we  will add prediction function outside the ann function  
+𝐧𝐨𝐰 𝐰𝐞  𝐰𝐢𝐥𝐥 𝐚𝐝𝐝 𝐩𝐫𝐞𝐝𝐢𝐜𝐭𝐢𝐨𝐧 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧 𝐨𝐮𝐭𝐬𝐢𝐝𝐞 𝐭𝐡𝐞 𝐚𝐧𝐧 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧  
 ```yml
 def prediction(self,x):
         self.units['0']=x
